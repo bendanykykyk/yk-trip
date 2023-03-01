@@ -1,0 +1,10 @@
+/* 定义全局变量 */
+:root{
+    --primary-color:#ff9854;
+    /* 全局样式改写 */
+    /* --van-tabbar-item-text-color:"#000" */
+}
+
+body{
+    font-size: 14px;
+}
