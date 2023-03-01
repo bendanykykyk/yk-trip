@@ -1,41 +1,16 @@
 <template>
   <div>
     <nav-bar title="KK旅游"></nav-bar>
-    <van-image width="100%" :src="requireResource('home/banner.webp')" />
+    <van-image width="100%" :src="requireResource('home/banner.jpg')" />
     <!-- 位置 -->
-    <div class="location">
-      <div class="city">广州</div>
-      <div class="position">
-        <span class="text">我的位置</span>
-        <img class="image" src="@/assets/img/home/icon_location.png" alt="" />
-      </div>
-    </div>
+    <home-location></home-location>
   </div>
 </template>
 
 <script setup>
 import navBar from '@/base-ui/navBar/navBar.vue'
+import HomeLocation from './cpns/HomeLocation.vue'
 import { requireResource } from '@/utils/load_assets'
 </script>
 
-<style lang="less" scoped>
-/* location */
-.location {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  height: 32px;
-  .position {
-    display: flex;
-    align-items: center;
-    .text {
-      position: relative;
-      left: -5px;
-    }
-    .image {
-      height: 18px;
-    }
-  }
-}
-</style>
+<style lang="less" scoped></style>

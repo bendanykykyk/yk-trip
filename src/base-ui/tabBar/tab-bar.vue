@@ -37,6 +37,7 @@ const currentIndex = ref(0)
 .tab-bar {
   //   --van-tabbar-item-text-color: #f00 !important;
   :deep(.van-tabbar-item__icon img) {
+    width: auto; // 微信有时候需要你加这个auto 修复bug
     height: 26px;
   }
 }
