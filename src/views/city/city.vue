@@ -1,19 +1,65 @@
 <template>
   <div class="city-container">
-    <!-- 搜索框 -->
-    <van-search
-      v-model="searchText"
-      shape="round"
-      show-action
-      placeholder="城市/区域/位置"
-      @search="onSearch"
-      @cancel="onCancel"
-    />
-    <van-tabs v-model:active="tabActiveIndex" color="#ff8594">
-      <template v-for="(value, key) in cities" :key="key">
-        <van-tab :title="value.title"></van-tab>
-      </template>
-    </van-tabs>
+    <div class="top">
+      <!-- 搜索框 -->
+      <van-search
+        v-model="searchText"
+        shape="round"
+        show-action
+        placeholder="城市/区域/位置"
+        @search="onSearch"
+        @cancel="onCancel"
+      />
+      <van-tabs v-model:active="tabActiveIndex" color="#ff8594">
+        <template v-for="(value, key) in cities" :key="key">
+          <van-tab :title="value.title"></van-tab>
+        </template>
+      </van-tabs>
+    </div>
+    <div class="content">
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>11</li>
+        <li>12</li>
+        <li>13</li>
+        <li>14</li>
+        <li>15</li>
+        <li>16</li>
+        <li>17</li>
+        <li>18</li>
+        <li>19</li>
+        <li>20</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>11</li>
+        <li>12</li>
+        <li>13</li>
+        <li>14</li>
+        <li>15</li>
+        <li>16</li>
+        <li>17</li>
+        <li>18</li>
+        <li>19</li>
+        <li>20</li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -50,5 +96,15 @@ const { cities } = toRefs(cityStore)
   :deep(.van-search__field .van-field__left-icon) {
     color: var(--primary-color);
   }
+  height: 100vh;
+}
+
+.top {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+.content {
+  margin-top: 98px;
 }
 </style>
