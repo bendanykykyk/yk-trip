@@ -99,12 +99,8 @@ const { cities } = toRefs(cityStore)
   height: 100vh;
 }
 
-.top {
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
 .content {
-  margin-top: 98px;
+  height: calc(100vh - 98px);
+  overflow-y: auto;
 }
 </style>
