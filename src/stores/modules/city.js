@@ -3,7 +3,10 @@ import { defineStore } from 'pinia'
 
 export const useCityStore = defineStore('city', {
   state: () => ({
-    cities: {}
+    cities: {},
+    currentCity: {
+      cityName: '广州'
+    }
   }),
 
   actions: {

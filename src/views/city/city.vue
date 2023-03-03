@@ -10,64 +10,39 @@
         @search="onSearch"
         @cancel="onCancel"
       />
-      <van-tabs v-model:active="tabActiveIndex" color="#ff8594">
+      <van-tabs v-model:active="tabActiveName" color="#ff8594">
         <template v-for="(value, key) in cities" :key="key">
-          <van-tab :title="value.title"></van-tab>
+          <van-tab :title="value.title" :name="key">
+            <!-- <city-group :city-groups-data="value"></city-group> -->
+          </van-tab>
         </template>
       </van-tabs>
     </div>
     <div class="content">
-      <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
-        <li>7</li>
-        <li>8</li>
-        <li>9</li>
-        <li>10</li>
-        <li>11</li>
-        <li>12</li>
-        <li>13</li>
-        <li>14</li>
-        <li>15</li>
-        <li>16</li>
-        <li>17</li>
-        <li>18</li>
-        <li>19</li>
-        <li>20</li>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
-        <li>7</li>
-        <li>8</li>
-        <li>9</li>
-        <li>10</li>
-        <li>11</li>
-        <li>12</li>
-        <li>13</li>
-        <li>14</li>
-        <li>15</li>
-        <li>16</li>
-        <li>17</li>
-        <li>18</li>
-        <li>19</li>
-        <li>20</li>
-      </ul>
+      <!-- <city-group :city-groups-data="currentGroup"></city-group> -->
+      <!-- 这里优化一下，因为group数据太多 切换要卡顿 -->
+      <template v-for="(value, key) in cities" :key="key">
+        <city-group
+          v-show="key === tabActiveName"
+          :city-groups-data="value"
+        ></city-group>
+      </template>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, toRefs } from 'vue'
+// hook
+import {
+  ref,
+  toRefs
+  // computed
+} from 'vue'
 import { useRouter } from 'vue-router'
-
+// 数据
 import { useCityStore } from '@/stores/modules/city'
+// 组件
+import cityGroup from './cpns/city-group.vue'
 
 // 搜索
 const searchText = ref('')
@@ -81,13 +56,17 @@ const onCancel = () => {
   router.back()
 }
 // tab
-const tabActiveIndex = ref(0)
+const tabActiveName = ref('')
 
 // 获取city数据
 const cityStore = useCityStore()
 cityStore.fetchAllCities()
-
 const { cities } = toRefs(cityStore)
+
+// 如果想要这里保持吃响应式，就要用computed（希望这里可以变化）。因为这里cities.value 和tabActiveName.value其实都只是值而已
+// 通过computed 当cities.value或者tabActiveName.value发生改变的时候，会重新计算
+// 当然你也可以直接在template循环的时候使用cities[tabActiveName].cities去循环，这样值变化的时候就会自动重新渲染
+// const currentGroup = computed(() => cities.value[tabActiveName.value])
 </script>
 
 <style lang="less" scoped>
@@ -97,6 +76,11 @@ const { cities } = toRefs(cityStore)
     color: var(--primary-color);
   }
   height: 100vh;
+}
+
+.top {
+  position: relative;
+  z-index: 10;
 }
 
 .content {

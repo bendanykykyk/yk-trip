@@ -1,6 +1,8 @@
 <template>
   <div class="location">
-    <div class="city" @click="handleCityClick">广州</div>
+    <div class="city" @click="handleCityClick">
+      {{ useCityStore().currentCity?.cityName }}
+    </div>
     <div class="position" @click="handlePositionClick">
       <span class="text">我的位置</span>
       <img class="image" src="@/assets/img/home/icon_location.png" alt="" />
@@ -11,6 +13,10 @@
 <script setup>
 import { showDialog } from 'vant'
 import { useRouter } from 'vue-router'
+
+// store
+import { useCityStore } from '@/stores/modules/city'
+
 const router = useRouter()
 const handleCityClick = () => {
   router.push('/city')
