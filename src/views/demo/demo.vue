@@ -20,5 +20,5 @@ for (const path in cpnModules) {
 }
 
 defineExpose({ components }) // 将 components 暴露给模板中的代码使用
-const pageInfo = [{ name: 'componentA', config: { color: '#FF0' } }]
+const pageInfo = [{ name: 'A', config: { color: '#FF0' } }]
 </script>
