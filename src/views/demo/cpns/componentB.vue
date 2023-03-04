@@ -5,8 +5,11 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: ['config']
-}
+<script setup>
+defineProps({
+  config: {
+    type: Object,
+    default: () => ({})
+  }
+})
 </script>
