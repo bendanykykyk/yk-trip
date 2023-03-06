@@ -8,6 +8,8 @@
     <home-time-picker></home-time-picker>
     <!-- 选择关键字/位置/民宿名 -->
     <home-hot-suggestion style="margin-top: 20px"></home-hot-suggestion>
+    <!-- 种类选择 -->
+    <home-categories></home-categories>
   </div>
 </template>
 
@@ -19,14 +21,17 @@ import navBar from '@/base-ui/navBar/navBar.vue'
 import HomeLocation from './cpns/HomeLocation.vue'
 import HomeTimePicker from './cpns/HomeTimePicker.vue'
 import HomeHotSuggestion from './cpns/HomeHotSuggestion.vue'
+import HomeCategories from './cpns/HomeCategories.vue'
 // 工具
 import { requireResource } from '@/utils/load_assets'
 // store
 import { useHomeStore } from '@/stores/modules/home'
 
 const homeStore = useHomeStore()
-homeStore.fetchHotSuggestion()
+
 // 发送网络请求
+homeStore.fetchHotSuggestion()
+homeStore.fetchCategories()
 </script>
 
 <style lang="less" scoped></style>

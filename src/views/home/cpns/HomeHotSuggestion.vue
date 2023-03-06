@@ -9,7 +9,7 @@
       </template>
     </div>
     <div class="search-bar">
-      <div class="btn">开始搜索</div>
+      <div class="btn" @click="handleSearch">开始搜索</div>
     </div>
   </div>
 </template>
@@ -18,10 +18,26 @@
 import { toRefs } from 'vue'
 // store
 import { useHomeStore } from '@/stores/modules/home'
+import { useRouter } from 'vue-router'
+import { useCityStore } from '@/stores/modules/city'
 
+// 获取热搜数据
 const homeStore = useHomeStore()
-
-const { hotSuggestion } = toRefs(homeStore)
+const { hotSuggestion, startTime, endTime } = toRefs(homeStore)
+const cityStore = useCityStore()
+const { currentCity } = toRefs(cityStore)
+// search按钮
+const router = useRouter()
+const handleSearch = () => {
+  router.push({
+    path: '/search',
+    query: {
+      startTime: startTime.value,
+      endTime: endTime.value,
+      cityName: currentCity.value.cityName
+    }
+  })
+}
 </script>
 
 <style lang="less" scoped>

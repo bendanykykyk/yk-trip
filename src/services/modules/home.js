@@ -6,3 +6,10 @@ export const getHotSuggestion = (params) => {
     params
   })
 }
+
+export const getCategories = (params) => {
+  return ykRequest.get({
+    url: '/home/categories',
+    params
+  })
+}

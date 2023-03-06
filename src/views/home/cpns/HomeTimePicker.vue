@@ -25,14 +25,15 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { format_date, get_date_diff, $dayjs } from '@/utils/format_date'
+import { ref, computed, toRefs } from 'vue'
+import { format_date, get_date_diff } from '@/utils/format_date'
+import { useHomeStore } from '@/stores/modules/home'
 // 选择日期
-const startDate = new Date()
-const endDate = $dayjs(new Date()).add(1, 'day')
 
-const startTime = ref(startDate)
-const endTime = ref(endDate)
+// 获取home里的startTime和endTime
+const homeStore = useHomeStore()
+const { startTime, endTime } = toRefs(homeStore)
+
 const stayTime = computed(() => get_date_diff(startTime.value, endTime.value))
 
 const startTimeStr = computed(() => format_date(startTime.value))
