@@ -1,4 +1,8 @@
-import { getCategories, getHotSuggestion } from '@/services/modules/home'
+import {
+  getCategories,
+  getHotSuggestion,
+  getRooms
+} from '@/services/modules/home'
 import { defineStore } from 'pinia'
 import { $dayjs } from '@/utils/format_date'
 // 选择日期
@@ -12,7 +16,10 @@ export const useHomeStore = defineStore('home', {
     startTime: startDate,
     endTime: endDate,
 
-    categories: []
+    categories: [],
+
+    rooms: [],
+    currentRoomPage: 1
   }),
   getters: {},
 
@@ -24,6 +31,11 @@ export const useHomeStore = defineStore('home', {
     async fetchCategories() {
       const res = await getCategories({ page: 1 })
       this.categories = res.data
+    },
+    async fetchRooms() {
+      const res = await getRooms({ page: this.currentRoomPage })
+      this.rooms.push(...res.data)
+      this.currentRoomPage++
     }
   }
 })

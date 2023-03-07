@@ -1,6 +1,6 @@
 <template>
   <div class="tab-bar">
-    <van-tabbar v-model="currentIndex">
+    <van-tabbar v-model="currentIndex" :route="true">
       <template v-for="(item, index) in tabbarData" :key="item.text">
         <van-tabbar-item icon="home-o" :to="item.path">
           <span :class="currentIndex === index ? 'active' : ''">
@@ -18,8 +18,10 @@
 </template>
 
 <script setup>
+import tabbarData from '@/assets/data/tabbar'
 import { requireResource } from '@/utils/load_assets'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 
 defineProps({
   tabbarData: {
@@ -29,8 +31,14 @@ defineProps({
     }
   }
 })
-
+const route = useRoute()
 const currentIndex = ref(0)
+// 修复更改路由时currentIndex没有改变的bug
+watch(route, (newRoute) => {
+  let index = tabbarData.findIndex((item) => item.path == newRoute.path)
+  if (index === -1) return
+  currentIndex.value = index
+})
 </script>
 
 <style lang="less" scoped>

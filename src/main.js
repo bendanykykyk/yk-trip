@@ -4,7 +4,7 @@ import App from './App.vue'
 import router from './router'
 
 import 'normalize.css'
-import '@/assets/css/index.css'
+import '@/assets/css/index.less'
 
 // 引入部分vant按需插件不能支持的组件的样式
 import '@/plugins/vant.js'

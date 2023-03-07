@@ -1,0 +1,41 @@
+/* 定义全局变量 */
+:root {
+    --primary-color: #f8924d;
+    --gray-color: #999;
+    --primary-gray-color: #666;
+    --theme-linear-gradient: linear-gradient(90deg, #fa8c1d, #fcaf3f);
+
+    /* 字体大小 */
+    --font-weight-bold: 700;
+    --font-weight-normal: 400;
+    /* 全局样式改写 */
+    /* --van-tabbar-item-text-color:"#000" */
+}
+
+body {
+    font-size: 14px;
+}
+
+
+.my-text(@lines) {
+    /* 样式代码 */
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: @lines;
+}
+
+.my-text-2 {
+    .my-text(2)
+}
+
+.my-text-3 {
+    .my-text(3)
+}
+
+.my-text-4 {
+    .my-text(4)
+}

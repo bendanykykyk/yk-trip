@@ -13,3 +13,10 @@ export const getCategories = (params) => {
     params
   })
 }
+
+export const getRooms = (params) => {
+  return ykRequest.get({
+    url: '/home/houselist',
+    params
+  })
+}
