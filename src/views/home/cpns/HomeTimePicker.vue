@@ -27,12 +27,12 @@
 <script setup>
 import { ref, computed, toRefs } from 'vue'
 import { format_date, get_date_diff } from '@/utils/format_date'
-import { useHomeStore } from '@/stores/modules/home'
+import { useMainStore } from '@/stores/modules/main'
 // 选择日期
 
 // 获取home里的startTime和endTime
-const homeStore = useHomeStore()
-const { startTime, endTime } = toRefs(homeStore)
+const mainStore = useMainStore()
+const { startTime, endTime } = toRefs(mainStore)
 
 const stayTime = computed(() => get_date_diff(startTime.value, endTime.value))
 
@@ -47,8 +47,10 @@ const isCalendarShow = ref(false)
 
 const onConfirm = (range) => {
   const [pickedStartTime, pickedEndTime] = range
-  startTime.value = pickedStartTime
-  endTime.value = pickedEndTime
+  // startTime.value = pickedStartTime
+  // endTime.value = pickedEndTime
+  mainStore.startTime = pickedStartTime
+  mainStore.endTime = pickedEndTime
   isCalendarShow.value = false
 }
 </script>

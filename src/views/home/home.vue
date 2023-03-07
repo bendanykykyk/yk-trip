@@ -10,7 +10,12 @@
     <home-hot-suggestion style="margin-top: 20px"></home-hot-suggestion>
     <!-- 种类选择 -->
     <home-categories></home-categories>
-    <div class="search-bar" v-if="isSearchBarShow">我是search-bar</div>
+    <div class="search-bar" v-if="isSearchBarShow">
+      <search-bar
+        :start-time="startTimeStr"
+        :end-time="endTimeStr"
+      ></search-bar>
+    </div>
     <!-- 房屋列表 -->
     <home-room></home-room>
   </div>
@@ -21,6 +26,7 @@
 import { useScroll } from '@/hook/useScroll.js'
 import { watch, computed } from 'vue'
 // 组件
+import searchBar from '@/base-ui/search-bar/search-bar.vue'
 import navBar from '@/base-ui/navBar/navBar.vue'
 import HomeLocation from './cpns/HomeLocation.vue'
 import HomeTimePicker from './cpns/HomeTimePicker.vue'
@@ -32,6 +38,8 @@ import { requireResource } from '@/utils/load_assets'
 
 // store
 import { useHomeStore } from '@/stores/modules/home'
+import { useMainStore } from '@/stores/modules/main'
+import { format_date } from '@/utils/format_date'
 
 const homeStore = useHomeStore()
 
@@ -58,7 +66,12 @@ watch(isReachBottom, async (newVal) => {
 //   }
 // })
 
+// search bar
 const isSearchBarShow = computed(() => scrollTop.value > 350)
+const mainStore = useMainStore()
+
+const startTimeStr = computed(() => format_date(mainStore.startTime, 'MM.DD'))
+const endTimeStr = computed(() => format_date(mainStore.endTime, 'MM.DD'))
 </script>
 
 <style lang="less" scoped>
