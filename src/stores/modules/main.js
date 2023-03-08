@@ -6,7 +6,9 @@ const endDate = $dayjs(new Date()).add(1, 'day')
 export const useMainStore = defineStore('main', {
   state: () => ({
     startTime: startDate,
-    endTime: endDate
+    endTime: endDate,
+    // loading
+    isLoading: true
   }),
 
   actions: {}

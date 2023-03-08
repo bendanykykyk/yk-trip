@@ -5,13 +5,15 @@
       v-if="!route.meta.isTabbarHidden"
       :tabbar-data="tabbarData"
     ></tab-bar>
+    <!-- loading组件 -->
+    <loading />
   </div>
-
-  <!-- 导航栏 -->
 </template>
 
 <script setup>
 import { RouterView, useRoute } from 'vue-router'
+// 组件
+import loading from './base-ui/loading/loading.vue'
 import tabBar from './base-ui/tabBar/tab-bar.vue'
 import tabbarData from '@/assets/data/tabbar.js'
 
