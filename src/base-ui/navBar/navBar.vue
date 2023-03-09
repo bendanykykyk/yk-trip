@@ -4,7 +4,9 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+// const onClickLeft = () => history.back()
+</script>
 
 <style lang="less" scoped>
 .nav-bar {

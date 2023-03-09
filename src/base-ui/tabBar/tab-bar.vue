@@ -43,6 +43,8 @@ watch(route, (newRoute) => {
 
 <style lang="less" scoped>
 .tab-bar {
+  position: relative;
+  z-index: 999;
   //   --van-tabbar-item-text-color: #f00 !important;
   :deep(.van-tabbar-item__icon img) {
     width: auto; // 微信有时候需要你加这个auto 修复bug

@@ -1,8 +1,5 @@
-import {
-  getCategories,
-  getHotSuggestion,
-  getRooms
-} from '@/services/modules/home'
+import { getCategories, getHotSuggestion } from '@/services/modules/home'
+import { getRooms } from '@/services/modules/room'
 import { defineStore } from 'pinia'
 
 export const useHomeStore = defineStore('home', {

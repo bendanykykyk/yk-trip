@@ -18,6 +18,14 @@ const router = createRouter({
       component: () => import('@/views/home/home.vue')
     },
     {
+      path: '/room-detail/:id',
+      name: 'room-detail',
+      component: () => import('@/views/room-detail/room-detail.vue'),
+      meta: {
+        isTabbarHidden: true
+      }
+    },
+    {
       path: '/favor',
       name: 'favor',
       component: () => import('@/views/favor/favor.vue')

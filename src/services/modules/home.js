@@ -15,11 +15,3 @@ export const getCategories = (params) => {
     isLoadingShow: false
   })
 }
-
-export const getRooms = (params) => {
-  return ykRequest.get({
-    url: '/home/houselist',
-    params,
-    isLoadingShow: true
-  })
-}

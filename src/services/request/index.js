@@ -13,7 +13,6 @@ class YKRequest {
 
     this.instance.interceptors.request.use((config) => {
       const { isLoadingShow } = config
-      // 额外操作
       isLoadingShow && (mainStore.isLoading = true)
       return config
     })

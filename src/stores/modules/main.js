@@ -8,7 +8,7 @@ export const useMainStore = defineStore('main', {
     startTime: startDate,
     endTime: endDate,
     // loading
-    isLoading: true
+    isLoading: false
   }),
 
   actions: {}
