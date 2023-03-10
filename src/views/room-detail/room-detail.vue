@@ -13,6 +13,19 @@
       ></room-swipe>
       <!-- 简介 -->
       <room-brief :brief-data="mainPart.topModule"></room-brief>
+      <!-- 房屋设施 -->
+      <room-device
+        :house-facility="mainPart.dynamicModule.facilityModule.houseFacility"
+      ></room-device>
+      <room-landlord
+        :landlord="mainPart.dynamicModule.landlordModule"
+      ></room-landlord>
+      <room-comment
+        :comment="mainPart.dynamicModule.commentModule"
+      ></room-comment>
+      <room-notice
+        :order-rules="mainPart.dynamicModule.rulesModule.orderRules"
+      ></room-notice>
     </div>
   </div>
 </template>
@@ -25,6 +38,10 @@ import { useRouter, useRoute } from 'vue-router'
 import navBar from '@/base-ui/navBar/navBar.vue'
 import roomSwipe from './cpns/room_01-swipe.vue'
 import roomBrief from './cpns/room_02-brief.vue'
+import roomDevice from './cpns/room_03-device.vue'
+import roomLandlord from './cpns/room_04-landlord.vue'
+import roomComment from './cpns/room_05-comment.vue'
+import roomNotice from './cpns/room_06-notice.vue'
 // api
 import { getRoomDetail } from '@/services/modules/room'
 
