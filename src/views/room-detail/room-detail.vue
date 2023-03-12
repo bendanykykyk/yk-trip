@@ -26,6 +26,7 @@
       <room-notice
         :order-rules="mainPart.dynamicModule.rulesModule.orderRules"
       ></room-notice>
+      <room-map :position="mainPart.dynamicModule.positionModule"></room-map>
     </div>
   </div>
 </template>
@@ -42,6 +43,7 @@ import roomDevice from './cpns/room_03-device.vue'
 import roomLandlord from './cpns/room_04-landlord.vue'
 import roomComment from './cpns/room_05-comment.vue'
 import roomNotice from './cpns/room_06-notice.vue'
+import roomMap from './cpns/room_07-map.vue'
 // api
 import { getRoomDetail } from '@/services/modules/room'
 
