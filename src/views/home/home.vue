@@ -1,5 +1,5 @@
 <template>
-  <div class="home-container">
+  <div class="home-container" ref="homeRef">
     <nav-bar title="KK旅游"></nav-bar>
     <van-image width="100%" :src="requireResource('home/banner.jpg')" />
     <!-- 位置 -->
@@ -21,10 +21,13 @@
   </div>
 </template>
 
+<script>
+export default { name: 'home' }
+</script>
 <script setup>
 // hook
 import { useScroll } from '@/hook/useScroll.js'
-import { watch, computed } from 'vue'
+import { watch, computed, onActivated, ref } from 'vue'
 // 组件
 import searchBar from '@/base-ui/search-bar/search-bar.vue'
 import navBar from '@/base-ui/navBar/navBar.vue'
@@ -55,6 +58,15 @@ watch(isReachBottom, async (newVal) => {
     await homeStore.fetchRooms()
     isReachBottom.value = false
   }
+})
+
+let homeRef = ref()
+// actived
+onActivated(() => {
+  const homeElement = homeRef.value
+  homeElement.scrollTo({
+    top: scrollTop.value
+  })
 })
 
 // const isSearchBarShow = ref(false)
