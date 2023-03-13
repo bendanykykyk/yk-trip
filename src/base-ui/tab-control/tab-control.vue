@@ -8,7 +8,7 @@
 <script setup>
 import { ref } from 'vue'
 
-let active = ref() // number or string
+let active = ref(0) // number or string
 defineProps({
   config: {
     type: Object,
@@ -24,6 +24,12 @@ const emit = defineEmits(['onTabClick'])
 const onChange = (...rest) => {
   emit('onTabClick', ...rest)
 }
+
+const setCurrentActive = (activeValue) => {
+  active.value = activeValue
+}
+
+defineExpose({ setCurrentActive })
 </script>
 
 <style lang="less" scoped></style>

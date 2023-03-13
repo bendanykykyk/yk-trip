@@ -2,6 +2,7 @@
   <div class="room-detail-container">
     <!-- 滚动360px 就显示tab-control -->
     <tab-control
+      ref="tabControlRef"
       v-if="isTabShow"
       class="tab-control"
       :data="tabs"
@@ -15,7 +16,8 @@
       @click-left="handleLeftClick"
     ></nav-bar>
     <!-- 轮播图 -->
-    <div v-if="mainPart" class="main">
+    <!-- v-memo为了节约性能的，这里滚动一次，下面:ref绑定的函数都会重复调用，不好 -->
+    <div v-if="mainPart" class="main" v-memo="[mainPart]">
       <room-swipe
         :swipe-data="mainPart.topModule.housePicture.housePics"
       ></room-swipe>
@@ -57,7 +59,8 @@
 
 <script setup>
 // hook
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref, computed, watch } from 'vue'
+
 import { useRouter, useRoute } from 'vue-router'
 import { useScroll } from '@/hook/useScroll'
 // 组件
@@ -91,21 +94,25 @@ onMounted(async () => {
 })
 
 // tab-control
-
 const { scrollTop } = useScroll()
 const isTabShow = computed(() => scrollTop.value > 360)
 
-// const elRefs = {}
 const elMap = ref({})
 let tabs = computed(() => Object.keys(elMap.value))
 const getSectionRef = (elRef) => {
+  // 因为卸载的时候也会被调用，此时$el已经没了
+  if (!elRef) return
+
   const name = elRef.$el.getAttribute('name')
   // 存放elMaps
   elMap.value[name] = elRef.$el
 }
 
 const navBarRef = ref()
+let isClick = ref(false)
+let currentDistance = -1
 const onTabClick = (index, title) => {
+  isClick.value = true
   // 这里是因为我用的窗口在滚，如果是元素内，就要考虑ref.value.scrollTo
   const scrollDistance =
     elMap.value[title].offsetTop - navBarRef.value.$el.clientHeight
@@ -113,7 +120,38 @@ const onTabClick = (index, title) => {
     top: scrollDistance,
     behavior: 'smooth'
   })
+  currentDistance = scrollDistance
 }
+// tab-control 滚动并且tab跟随变化
+
+const tabControlRef = ref()
+// 1.找到[10,20,30,40]这么个scrollTop数组
+
+watch(scrollTop, (newVal) => {
+  // 如果说 我们计算出来的滚动的位置和页面当前scrollTop相等，那么就相当于点击结束了
+  if (currentDistance == newVal) {
+    isClick.value = false
+  }
+  // 如果当前是鼠标点击状态，就不用走下面的操作了
+  if (isClick.value) return
+  // elMap {'name':dom1,'name2':dom2}
+  // 1.找到[10,20,30,40]这么个scrollTop数组
+  let elValues = Object.values(elMap.value)
+  const offsetTops = elValues.map((item) => item.offsetTop)
+  console.log(offsetTops)
+
+  // 2.每次都去遍历一下，找到那个刚好大于scrollTop的index
+  let index = -1
+  for (let i = 0; i < offsetTops.length; i++) {
+    if (newVal + 46 < offsetTops[i]) {
+      index = i - 1
+      break
+    }
+  }
+
+  // 3.设置子组件的active
+  tabControlRef.value?.setCurrentActive(index)
+})
 </script>
 
 <style lang="less" scoped>
