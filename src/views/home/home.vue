@@ -87,6 +87,12 @@ const endTimeStr = computed(() => format_date(mainStore.endTime, 'MM.DD'))
 </script>
 
 <style lang="less" scoped>
+.home-container {
+  height: 100vh;
+  overflow-y: auto;
+  padding-bottom: 50px;
+  box-sizing: border-box;
+}
 .search-bar {
   position: fixed;
   left: 0;
