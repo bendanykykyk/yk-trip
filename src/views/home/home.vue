@@ -52,7 +52,8 @@ homeStore.fetchCategories()
 homeStore.fetchRooms()
 
 // 监听是否到底部
-const { isReachBottom, scrollTop } = useScroll()
+let homeRef = ref()
+const { isReachBottom, scrollTop } = useScroll(homeRef)
 watch(isReachBottom, async (newVal) => {
   if (newVal) {
     await homeStore.fetchRooms()
@@ -60,11 +61,10 @@ watch(isReachBottom, async (newVal) => {
   }
 })
 
-let homeRef = ref()
 // actived
 onActivated(() => {
-  const homeElement = homeRef.value
-  homeElement.scrollTo({
+  // const homeElement = homeRef.value
+  homeRef.value?.scrollTo({
     top: scrollTop.value
   })
 })
