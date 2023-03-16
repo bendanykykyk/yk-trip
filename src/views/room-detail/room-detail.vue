@@ -1,5 +1,5 @@
 <template>
-  <div class="room-detail-container">
+  <div class="room-detail-container" ref="detailRef">
     <!-- 滚动360px 就显示tab-control -->
     <tab-control
       ref="tabControlRef"
@@ -94,7 +94,8 @@ onMounted(async () => {
 })
 
 // tab-control
-const { scrollTop } = useScroll()
+const detailRef = ref()
+const { scrollTop } = useScroll(detailRef)
 const isTabShow = computed(() => scrollTop.value > 360)
 
 const elMap = ref({})
@@ -114,9 +115,9 @@ let currentDistance = -1
 const onTabClick = (index, title) => {
   isClick.value = true
   // 这里是因为我用的窗口在滚，如果是元素内，就要考虑ref.value.scrollTo
-  const scrollDistance =
-    elMap.value[title].offsetTop - navBarRef.value.$el.clientHeight
-  window.scrollTo({
+  // navBarRef.value.$el.clientHeight
+  const scrollDistance = elMap.value[title].offsetTop - 44
+  detailRef.value.scrollTo({
     top: scrollDistance,
     behavior: 'smooth'
   })
@@ -143,7 +144,7 @@ watch(scrollTop, (newVal) => {
   // 2.每次都去遍历一下，找到那个刚好大于scrollTop的index
   let index = -1
   for (let i = 0; i < offsetTops.length; i++) {
-    if (newVal + 46 < offsetTops[i]) {
+    if (newVal + 44 < offsetTops[i]) {
       index = i - 1
       break
     }
@@ -155,11 +156,16 @@ watch(scrollTop, (newVal) => {
 </script>
 
 <style lang="less" scoped>
+.room-detail-container {
+  height: 100vh;
+  overflow-y: auto;
+}
 .tab-control {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 11;
+  height: 44;
 }
 </style>

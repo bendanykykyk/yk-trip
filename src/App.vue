@@ -6,7 +6,7 @@
       </keep-alive>
     </router-view>
     <tab-bar
-      v-if="!route.meta.isTabbarHidden"
+      v-show="!route.meta.isTabbarHidden"
       :tabbar-data="tabbarData"
     ></tab-bar>
     <!-- loading组件 -->

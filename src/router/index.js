@@ -1,7 +1,12 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {
+  createRouter,
+  // createWebHistory,
+  createWebHashHistory
+} from 'vue-router'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  // history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
@@ -38,7 +43,10 @@ const router = createRouter({
     {
       path: '/profile',
       name: 'profile',
-      component: () => import('@/views/profile/profile.vue')
+      component: () => import('@/views/profile/profile.vue'),
+      meta: {
+        isTabbarHidden: true
+      }
     },
     {
       path: '/city',
