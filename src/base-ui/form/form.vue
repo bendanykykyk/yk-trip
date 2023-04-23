@@ -1,7 +1,0 @@
-<template>
-  <div class="form-container">form</div>
-</template>
-
-<script setup></script>
-
-<style lang="less" scoped></style>

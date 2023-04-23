@@ -8,11 +8,13 @@ module.exports = {
     'eslint:recommended',
     '@vue/eslint-config-prettier/skip-formatting'
   ],
+  parse: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 'latest'
   },
   rules: {
     'vue/multi-word-component-names': ['off'],
+    'max-len': ['error', { code: 120 }],
     'prettier/prettier': [
       'warn',
       {
