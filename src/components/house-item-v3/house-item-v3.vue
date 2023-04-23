@@ -23,10 +23,10 @@
           <span
             class="coupon"
             :style="{
-              color: info.priceTipBadge.color,
+              color: info?.priceTipBadge?.color,
               background: 'linear-gradient(90deg, #fa8c1d, #fcaf3f)'
             }"
-            >{{ info.priceTipBadge.text }}</span
+            >{{ info?.priceTipBadge?.text }}</span
           >
         </div>
       </div>

@@ -9,11 +9,13 @@ import Components from 'unplugin-vue-components/vite'
 import { VantResolver } from 'unplugin-vue-components/resolvers'
 // https://vitejs.dev/config/
 export default defineConfig({
+  sourceMap: true,
   plugins: [
     vue(),
     vueJsx(),
     Components({
-      resolvers: [VantResolver()]
+      dirs: ['src/base-ui/d-form', 'src/components'], // 指定需要自动引入的组件的目录
+      resolvers: [VantResolver({})]
     })
   ],
   base: './',

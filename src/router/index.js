@@ -15,7 +15,10 @@ const router = createRouter({
     {
       path: '/demo',
       name: 'demo',
-      component: () => import('@/views/demo/demo.vue')
+      component: () => import('@/views/demo/data-form.vue'),
+      meta: {
+        isTabbarHidden: true
+      }
     },
     {
       path: '/home',

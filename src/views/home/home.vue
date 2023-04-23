@@ -21,9 +21,9 @@
   </div>
 </template>
 
-<script>
+<!-- <script>
 export default { name: 'home' }
-</script>
+</script> -->
 <script setup>
 // hook
 import { useScroll } from '@/hook/useScroll.js'
